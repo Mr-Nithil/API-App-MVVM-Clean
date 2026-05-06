@@ -14,23 +14,38 @@ class PostListScreen extends ConsumerWidget {
       appBar: AppBar(title: Text("Post List")),
       body: postState.when(
         data: (posts) {
-          return ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (_, index) {
-              final post = posts[index];
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (_, index) {
+                final post = posts[index];
 
-              return ListTile(
-                title: Text(post.title),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => PostDetailScreen(postId: post.id),
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                  child: ListTile(
+                    title: Text(post.title),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black, width: 0.5),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  );
-                },
-              );
-            },
+                    subtitle: Text(
+                      "Tap to read more about this post...",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PostDetailScreen(postId: post.id),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
           );
         },
         error: (e, _) => Center(child: Text(e.toString())),

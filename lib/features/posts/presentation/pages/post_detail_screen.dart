@@ -40,37 +40,93 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
           return Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Text(
+                  "Title",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                const SizedBox(height: 8),
                 isEditing
-                    ? TextField(controller: titleController, maxLines: null)
-                    : Text(post.title),
+                    ? TextField(
+                        controller: titleController,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          hintText: "Enter post title",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
+                      )
+                    : Text(post.title, style: const TextStyle(fontSize: 16)),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
 
+                Text(
+                  "Body",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                const SizedBox(height: 8),
                 isEditing
-                    ? TextField(controller: bodyController, maxLines: null)
-                    : Text(post.body),
+                    ? TextField(
+                        controller: bodyController,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          hintText: "Write your content here...",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      )
+                    : Text(
+                        post.body,
+                        style: const TextStyle(fontSize: 16, height: 1.5),
+                      ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 32),
 
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: Colors.grey[700],
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () {
                     if (isEditing) {
                       final updated = post.copyWith(
                         title: titleController.text,
                         body: bodyController.text,
                       );
-
                       ref
                           .read(postViewModelProvider.notifier)
                           .updatePost(updated);
                     }
-
                     setState(() {
                       isEditing = !isEditing;
                     });
                   },
-                  child: Text(isEditing ? 'Save' : 'Edit'),
+                  child: Text(
+                    isEditing ? 'Save Changes' : 'Edit Post',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
