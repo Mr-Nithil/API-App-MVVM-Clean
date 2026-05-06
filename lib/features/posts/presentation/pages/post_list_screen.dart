@@ -1,4 +1,5 @@
 import 'package:api_app_mvvm_clean/core/widgets/loader.dart';
+import 'package:api_app_mvvm_clean/features/posts/presentation/pages/post_detail_screen.dart';
 import 'package:api_app_mvvm_clean/features/posts/presentation/viewmodels/post_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,7 +19,17 @@ class PostListScreen extends ConsumerWidget {
             itemBuilder: (_, index) {
               final post = posts[index];
 
-              return ListTile(title: Text(post.title), onTap: () {});
+              return ListTile(
+                title: Text(post.title),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PostDetailScreen(postId: post.id),
+                    ),
+                  );
+                },
+              );
             },
           );
         },
