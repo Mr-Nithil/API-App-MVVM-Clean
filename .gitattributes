@@ -3,3 +3,16 @@ build/* linguist-generated=true
 web/* linguist-generated=true
 *.c++ linguist-detectable=false
 *.dart linguist-detectable=true
+
+# Mark common native sources as not used for language detection
+*.cc linguist-detectable=false
+*.cpp linguist-detectable=false
+*.c linguist-detectable=false
+*.h linguist-detectable=false
+
+# Treat platform embedding folders as generated (boilerplate)
+linux/** linguist-generated=true
+windows/** linguist-generated=true
+macos/** linguist-generated=true
+ios/** linguist-generated=true
+android/** linguist-generated=true
