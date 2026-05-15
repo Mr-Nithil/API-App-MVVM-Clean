@@ -37,3 +37,9 @@ Clone the repo, run `flutter pub get`, and launch the app on your device or emul
 ---
 
 This project is for demonstration and evaluation of clean architecture and Riverpod state management in Flutter.
+
+## App Flow Screenshot
+
+Below is a screenshot of the app flow, showing the List Screen and Details Screen with editing capabilities.
+
+![App Flow](assets/screenshots/App%20Flow.png)
